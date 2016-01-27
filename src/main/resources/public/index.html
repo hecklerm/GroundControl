@@ -8,8 +8,7 @@
     <script src="assets/raphael-2.1.4.min.js"></script>
     <script src="assets/justgage.js"></script>
     <script type='text/javascript'>
-        var lum;
-        var pressure;
+        var cpm;
         var IPData;
         var IPControl;
         var webSocket;
@@ -87,7 +86,7 @@
 
             tempGauge.refresh(json.temp.toFixed(1));
             humidGauge.refresh(json.hum.toFixed(1));
-            pressGauge.refresh(json.pressure.toFixed(0));
+            cpmGauge.refresh(json.cpm.toFixed(0));
         }
 
         function onOpen(event) {
@@ -190,7 +189,7 @@
 </div>
 <div id="tempGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
 <div id="humidGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
-<div id="pressGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="cpmGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
 <script>
     var tempGauge = new JustGage({
         id: "tempGauge",
@@ -218,13 +217,13 @@
         shadowOpacity: 0.8
     });
 
-    var pressGauge = new JustGage({
-        id: "pressGauge",
+    var cpmGauge = new JustGage({
+        id: "cpmGauge",
         value: 0,
-        min: 90000,
-        max: 110000,
-        title: "Atmospheric Pressure",
-        label: "Pa",
+        min: 0,
+        max: 500,
+        title: "Radiation",
+        label: "CPM",
         shadowSize: 15,
         shadowVerticalOffset: 15,
         shadowOpacity: 0.8

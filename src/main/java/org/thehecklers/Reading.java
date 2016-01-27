@@ -13,24 +13,18 @@ public class Reading {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
-	private double hum;
-	private double temp;
-	private long pressure;
-
-    /*
-        MH add:
-	    Radioactivity levels (beta and gamma)
-	    Bearing/directionality on three planes (x, y, z)
-	*/
+	private double hum, temp;
+	private long cpm;
+	private int heading;
 
 	protected Reading() {}
 	
-	public Reading(int id, double hum, double temp, long pressure) {
-		//super();
+	public Reading(int id, double hum, double temp, long cpm, int heading) {
 		this.id = id;
 		this.hum = hum;
 		this.temp = temp;
-		this.pressure = pressure;
+		this.cpm = cpm;
+		this.heading = heading;
 	}
 
 	public int getId() {
@@ -57,16 +51,25 @@ public class Reading {
 		this.temp = temp;
 	}
 
-	public long getPressure() {
-		return pressure;
+	public long getCpm() {
+		return cpm;
 	}
 
-	public void setPressure(long pressure) {
-		this.pressure = pressure;
+	public void setCpm(long cpm) {
+		this.cpm = cpm;
+	}
+
+	public int getHeading() {
+		return heading;
+	}
+
+	public void setHeading(int heading) {
+		this.heading = heading;
 	}
 
 	@Override
 	public String toString() {
-		return "Reading [id=" + id + ", hum=" + hum + ", temp=" + temp + ", pressure=" + pressure + "]";
+		return "Reading [id=" + id + ", hum=" + hum + ", temp=" + temp + ", radiation cpm=" + cpm +
+				", heading=" + heading + "]";
 	}
 }
