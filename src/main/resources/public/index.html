@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="css/groundcontrol.css">
+    <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
     <script src="assets/raphael-2.1.4.min.js"></script>
     <script src="assets/justgage.js"></script>
     <script type='text/javascript'>
-        var cpm;
+        var compassHeading;
         var IPData;
         var IPControl;
         var webSocket;
@@ -16,6 +17,22 @@
         var IPCam;
 
         function init() {
+            compassHeading = new SegmentDisplay("compassHeading");
+            compassHeading.pattern = "###";
+            compassHeading.displayAngle = 6;
+            compassHeading.digitHeight = 20;
+            compassHeading.digitWidth = 14;
+            compassHeading.digitDistance = 2.5;
+            compassHeading.segmentWidth = 2;
+            compassHeading.segmentDistance = 0.3;
+            compassHeading.segmentCount = 7;
+            compassHeading.cornerType = 3;
+            compassHeading.colorOn = "#E5E5E5";
+            compassHeading.colorOff = "#2A4747";
+            compassHeading.draw();
+
+            document.getElementById("sensorD").style.display = "block";
+
             webSocketControl = new WebSocket(IPControl);
 
             webSocketControl.onmessage = function (event) {
@@ -76,10 +93,8 @@
             };
 
             document.getElementById("cam").src = IPCam;
-
-            createTimeline();
-
         }
+        
         function onMessage(event) {
             var json = JSON.parse(event.data);
             var time = new Date().getTime();
@@ -87,6 +102,7 @@
             tempGauge.refresh(json.temp.toFixed(1));
             humidGauge.refresh(json.hum.toFixed(1));
             cpmGauge.refresh(json.cpm.toFixed(0));
+            compassHeading.setValue(pad((json.heading).toString(), 3));
         }
 
         function onOpen(event) {
@@ -96,6 +112,7 @@
         function onError(event) {
             alert('Error: ' + IPData + " " + event);
         }
+
         function getIP() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -115,7 +132,11 @@
             xhr.send(null);
         }
 
-//        function mode1() {
+        function pad(value, length) {
+            return (value.toString().length < length) ? pad("0" + value, length) : value.toString();
+        }
+
+        //        function mode1() {
 //            var checkbox = document.getElementById("extOnOffSwitch1");
 //            if (checkbox.checked === false) {   // manual
 //                webSocketControl.send(sensorId.concat("a"));
@@ -190,6 +211,11 @@
 <div id="tempGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
 <div id="humidGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
 <div id="cpmGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="sensorD" class="box-invisible" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
+    <div id='containerD' style='padding: 10px;'></div>
+    <div align="center" style="margin-top: 30px; font-size: x-large; font-weight: 700; color: darkgrey;">Direction</div>
+    <canvas id="compassHeading" width="320" height="270"></canvas>
+</div>
 <script>
     var tempGauge = new JustGage({
         id: "tempGauge",
