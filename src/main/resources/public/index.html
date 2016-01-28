@@ -136,7 +136,35 @@
             return (value.toString().length < length) ? pad("0" + value, length) : value.toString();
         }
 
-        //        function mode1() {
+
+        // Timeout, started on mousedown, triggers the beginning of a hold
+        var holdStarter = null;
+        // Milliseconds to wait before recognizing a hold
+        var holdDelay = 500;
+        // Indicates the user is currently holding the mouse down
+        var holdActive = false;
+
+        function forward() {
+            webSocketControl.send("F");
+        }
+
+        function backward() {
+            webSocketControl.send("B");
+        }
+
+        function left() {
+            webSocketControl.send("L");
+        }
+
+        function right() {
+            webSocketControl.send("R");
+        }
+
+        function stop() {
+            webSocketControl.send("S");
+        }
+
+//        function mode1() {
 //            var checkbox = document.getElementById("extOnOffSwitch1");
 //            if (checkbox.checked === false) {   // manual
 //                webSocketControl.send(sensorId.concat("a"));
@@ -362,6 +390,12 @@
         <div class="corner-bot-right"></div>
     </div>
 </div>
+
+<button onclick="forward()">Forward</button>
+<button onclick="backward()">Backward</button>
+<button onclick="stop()">STOP</button>
+<button onclick="left()">Left</button>
+<button onclick="right()">Right</button>
 
 <div style="clear: both"></div>
 <div class="boxTitle"
