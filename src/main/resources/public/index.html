@@ -8,6 +8,112 @@
     <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
     <script src="assets/raphael-2.1.4.min.js"></script>
     <script src="assets/justgage.js"></script>
+    <script id="Button actions" type="text/javascript">
+        // Forward Button
+        function fBtnImgA() {
+            document.images["fButton"].src= "images/GreenButton_UpArrow_Active.png";
+            return true;
+        }
+
+        function fBtnImgN() {
+            document.images["fButton"].src = "images/GreenButton_UpArrow_Normal.png";
+            return true;
+        }
+
+        function fBtnImgP() {
+            document.images["fButton"].src = "images/GreenButton_UpArrow_Press.png";
+            return true;
+        }
+
+        function fBtnMUp() {
+            fBtnImgA();
+            return true;
+        }
+
+        // Backward Button
+        function bBtnImgA() {
+            document.images["bButton"].src= "images/GreenButton_DownArrow_Active.png";
+            return true;
+        }
+
+        function bBtnImgN() {
+            document.images["bButton"].src = "images/GreenButton_DownArrow_Normal.png";
+            return true;
+        }
+
+        function bBtnImgP() {
+            document.images["bButton"].src = "images/GreenButton_DownArrow_Press.png";
+            return true;
+        }
+
+        function bBtnMUp() {
+            bBtnImgA();
+            return true;
+        }
+
+        // Stop Button
+        function sBtnImgA() {
+            document.images["sButton"].src= "images/RedButton_Close_Active.png";
+            return true;
+        }
+
+        function sBtnImgN() {
+            document.images["sButton"].src = "images/RedButton_Close_Normal.png";
+            return true;
+        }
+
+        function sBtnImgP() {
+            document.images["sButton"].src = "images/RedButton_Close_Press.png";
+            return true;
+        }
+
+        function sBtnMUp() {
+            sBtnImgA();
+            return true;
+        }
+
+        // Left (turn) Button
+        function lBtnImgA() {
+            document.images["lButton"].src= "images/GreenButton_LeftArrow_Active.png";
+            return true;
+        }
+
+        function lBtnImgN() {
+            document.images["lButton"].src = "images/GreenButton_LeftArrow_Normal.png";
+            return true;
+        }
+
+        function lBtnImgP() {
+            document.images["lButton"].src = "images/GreenButton_LeftArrow_Press.png";
+            return true;
+        }
+
+        function lBtnMUp() {
+            lBtnImgA();
+            return true;
+        }
+
+        // Right (turn) Button
+        function rBtnImgA() {
+            document.images["rButton"].src= "images/GreenButton_RightArrow_Active.png";
+            return true;
+        }
+
+        function rBtnImgN() {
+            document.images["rButton"].src = "images/GreenButton_RightArrow_Normal.png";
+            return true;
+        }
+
+        function rBtnImgP() {
+            document.images["rButton"].src = "images/GreenButton_RightArrow_Press.png";
+            return true;
+        }
+
+        function rBtnMUp() {
+            rBtnImgA();
+            return true;
+        }
+    </script>
     <script type='text/javascript'>
         var compassHeading;
         var IPData;
@@ -391,11 +497,51 @@
     </div>
 </div>
 
-<button onclick="forward()">Forward</button>
-<button onclick="backward()">Backward</button>
-<button onclick="stop()">STOP</button>
-<button onclick="left()">Left</button>
-<button onclick="right()">Right</button>
+<div id="sensorD" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 348px;">
+    <table>
+        <tr>
+            <td></td>
+            <td>
+                <a href="Javascript:forward()" onMouseOver="return fBtnImgA()" onMouseOut= "return fBtnImgN()" onMouseDown="return fBtnImgP()"
+                   onMouseUp="return fBtnMUp()"><img name="fButton" src="images/GreenButton_UpArrow_Normal.png"
+                   width="110" height="110" border="0" alt="forward button"></a>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <a href="Javascript:left()" onMouseOver="return lBtnImgA()" onMouseOut= "return lBtnImgN()" onMouseDown="return lBtnImgP()"
+                   onMouseUp="return lBtnMUp()"><img name="lButton" src="images/GreenButton_LeftArrow_Active.png"
+                                                     width="110" height="110" border="0" alt="left button"></a>
+            </td>
+            <td>
+                <a href="Javascript:stop()" onMouseOver="return sBtnImgA()" onMouseOut= "return sBtnImgN()" onMouseDown="return sBtnImgP()"
+                   onMouseUp="return sBtnMUp()"><img name="sButton" src="images/RedButton_Close_Normal.png"
+                                                     width="110" height="110" border="0" alt="stop button"></a>
+            </td>
+            <td>
+                <a href="Javascript:right()" onMouseOver="return rBtnImgA()" onMouseOut= "return rBtnImgN()" onMouseDown="return rBtnImgP()"
+                   onMouseUp="return rBtnMUp()"><img name="rButton" src="images/GreenButton_RightArrow_Normal.png"
+                                                     width="110" height="110" border="0" alt="right button"></a>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <a href="Javascript:backward()" onMouseOver="return bBtnImgA()" onMouseOut= "return bBtnImgN()" onMouseDown="return bBtnImgP()"
+                   onMouseUp="return bBtnMUp()"><img name="bButton" src="images/GreenButton_DownArrow_Normal.png"
+                                                     width="110" height="110" border="0" alt="back button"></a>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<!--<button onclick="forward()">Forward</button>-->
+<!--<button onclick="backward()">Backward</button>-->
+<!--<button onclick="stop()">STOP</button>-->
+<!--<button onclick="left()">Left</button>-->
+<!--<button onclick="right()">Right</button>-->
 
 <div style="clear: both"></div>
 <div class="boxTitle"
