@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 public class Location {
     private String cameraHost;
     private String cameraPort;
-    private String sensorId;
 
     public String getCameraHost() {
         return cameraHost;
@@ -32,14 +31,6 @@ public class Location {
 
     public void setCameraPort(String cameraPort) {
         this.cameraPort = cameraPort;
-    }
-
-    public String getSensorId() {
-        return sensorId;
-    }
-
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
     }
 
     @RequestMapping("/remote")
@@ -60,7 +51,7 @@ public class Location {
             System.out.println("baseEnvLinkURL=|" + baseEnvLinkURL + "|");
         }
 
-        return baseEnvLinkURL + "*" + cameraHost + ":" + cameraPort + "*" + sensorId;
+        return baseEnvLinkURL + "*" + cameraHost + ":" + cameraPort;
     }
 
     @RequestMapping("/remoteTest")
